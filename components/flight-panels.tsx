@@ -1,3 +1,4 @@
+"use client";
 import { useMemo, useState } from "react";
 import type { Flight } from "@/lib/flight-data";
 
