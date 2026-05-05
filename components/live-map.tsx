@@ -19,6 +19,7 @@ import {
   bearing,
   generateFlights,
 } from "@/lib/flight-data";
+import dynamic from "next/dynamic";
 
 function planeIcon(color: string, heading: number) {
   return L.divIcon({

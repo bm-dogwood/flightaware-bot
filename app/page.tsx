@@ -3,11 +3,24 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { LiveMap } from "@/components/live-map";
+
 import { FlightList, FlightDetail } from "@/components/flight-panels";
 import { generateFlights, type Flight } from "@/lib/flight-data";
 import type { AirportDelay } from "@/lib/api";
 import { AIRPORT_DELAYS } from "@/lib/flight-data";
+import dynamic from "next/dynamic";
+
+const LiveMap = dynamic(
+  () => import("@/components/live-map").then((mod) => mod.LiveMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full overflow-hidden border border-border/70 rounded-md bg-card/30 animate-pulse min-h-[640px] flex items-center justify-center">
+        <div className="font-mono text-amber">LOADING SCOPE...</div>
+      </div>
+    ),
+  }
+);
 
 function useCounter(target: number, durationMs = 1500) {
   const [n, setN] = useState(0);
